@@ -5,11 +5,11 @@
 { config, pkgs, ... }:
 
 # let
-  # openrgb-rules = builtins.fetchurl
-    # {
-      # url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/jobs/artifacts/master/raw/60-openrgb.rules?job=Linux+64+AppImage&inline=false";
-      # name = "60-openrgb.rules";
-    # };
+# openrgb-rules = builtins.fetchurl
+# {
+# url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/jobs/artifacts/master/raw/60-openrgb.rules?job=Linux+64+AppImage&inline=false";
+# name = "60-openrgb.rules";
+# };
 # 
 # in
 
@@ -22,8 +22,6 @@
       ./users.nix
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -147,8 +145,8 @@
   services.tailscale.enable = true;
 
   services.hardware.openrgb = {
-  	enable = true;
-  	motherboard = "amd";
+    enable = true;
+    motherboard = "amd";
   };
 
   virtualisation = {
@@ -173,6 +171,20 @@
       };
     };
   };
+
+  nix = {
+    settings = {
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
+
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

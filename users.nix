@@ -16,7 +16,7 @@
     };
     maya = {
       isNormalUser = true;
-      extraGroups = [  ];
+      extraGroups = [ ];
       uid = 1001;
     };
   };
