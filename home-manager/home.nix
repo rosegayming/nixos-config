@@ -6,14 +6,16 @@
   home.username = "quartz";
   home.homeDirectory = "/home/quartz";
 
-  home.packages = [
-    pkgs.btop
-    # pkgs.plover.dev
-    pkgs.kate
-    pkgs.flutter
-    pkgs.olm
-	pkgs.imagemagick
-	pkgs.prusa-slicer
+  home.packages = with pkgs;  [
+    btop
+    kate
+    olm
+    imagemagick
+    prusa-slicer
+    nix-du
+    graphviz
+    zgrviewer
+    gh
   ];
 
   programs.git = {
