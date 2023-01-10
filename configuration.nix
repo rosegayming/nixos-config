@@ -24,9 +24,11 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  boot.kernel.sysctl = { "vm.max_map_count" = 16777216; };
 
   # services.udev.extraRules = builtins.readFile openrgb-rules;
 
@@ -44,6 +46,10 @@
     externalInterface = "eno1";
     # Lazy IPv6 connectivity for the container
     enableIPv6 = true;
+  };
+  networking.hosts = {
+    # 127.0.0.1 modules-cdn.eac-prod.on.epicgames.com
+    "127.0.0.1" = [ "modules-cdn.eac-prod.on.epicgames.com" ];
   };
 
 
@@ -86,6 +92,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
   hardware.opengl.driSupport32Bit = true;
+  hardware.nvidia.modesetting.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -115,6 +122,7 @@
     pulse.enable = true;
     jack.enable = true;
   };
+  programs.noisetorch.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -134,20 +142,42 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.openFirewall = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 41641 8000 ];
-  networking.firewall.allowedUDPPorts = [ 41641 8000 ];
+  networking.firewall.allowedTCPPorts = [ 41641 8000 25565 25510 ];
+  networking.firewall.allowedUDPPorts = [ 41641 8000 25565 25510 ];
   networking.firewall.checkReversePath = "loose";
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
   services.tailscale.enable = true;
 
+  services.murmur = {
+    enable = true;
+    openFirewall = true;
+    port = 12345;
+    bandwidth = 256000;
+  };
+
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
   };
+
+  environment.sessionVariables = rec {
+    XDG_CACHE_HOME = "\${HOME}/.cache";
+    XDG_CONFIG_HOME = "\${HOME}/.config";
+    XDG_BIN_HOME = "\${HOME}/.local/bin";
+    XDG_DATA_HOME = "\${HOME}/.local/share";
+    # Steam needs this to find Proton-GE
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    # note: this doesn't replace PATH, it just adds this to it
+    PATH = [
+      "\${XDG_BIN_HOME}"
+    ];
+  };
+
 
   virtualisation = {
     podman = {

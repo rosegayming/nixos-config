@@ -19,5 +19,10 @@
       extraGroups = [ ];
       uid = 1001;
     };
+    minecraf = {
+      isNormalUser = true;
+      extraGroups = [ ];
+      uid = 1002;
+    };
   };
 }

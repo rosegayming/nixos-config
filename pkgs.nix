@@ -1,3 +1,4 @@
+# { plover-flake, ... }:
 { pkgs, ... }:
 
 {
@@ -9,17 +10,21 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    micro # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    nushell
-    wget
-    ark
-    xclip
-    prismlauncher
-    nixpkgs-fmt
-    ansible
-    python311
-    # openrgb
+  environment.systemPackages = [
+    pkgs.micro
+    pkgs.nushell
+    pkgs.wget
+    pkgs.ark
+    pkgs.xclip
+    pkgs.prismlauncher
+    pkgs.nixpkgs-fmt
+    pkgs.ansible
+    pkgs.python311
+    pkgs.arcanPackages.all-wrapped
+    # plover-flake.packages.${pkgs.system}.plover
+    pkgs.wine-staging
+    pkgs.winetricks
+    pkgs.temurin-bin
   ];
 
 }

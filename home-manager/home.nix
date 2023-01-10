@@ -16,6 +16,15 @@
     graphviz
     zgrviewer
     gh
+    qbittorrent
+    temurin-bin
+    kompare
+    mumble
+    cider
+    packwiz
+    minecraft
+    obs-studio
+    lutris
   ];
 
   programs.git = {
@@ -37,6 +46,12 @@
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
+  };
+
+  services.easyeffects.enable = true;
+
+  home.sessionVariables = {
+    DXVK_ASYNC = "1";
   };
 
   # This value determines the Home Manager release that your
