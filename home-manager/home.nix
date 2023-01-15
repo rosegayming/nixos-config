@@ -25,6 +25,7 @@
     minecraft
     obs-studio
     lutris
+    cargo
   ];
 
   programs.git = {
