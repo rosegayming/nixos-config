@@ -145,8 +145,8 @@
   services.openssh.openFirewall = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 41641 8000 25565 25510 ];
-  networking.firewall.allowedUDPPorts = [ 41641 8000 25565 25510 ];
+  networking.firewall.allowedTCPPorts = [ 41641 8000 25565 25510 6567 ];
+  networking.firewall.allowedUDPPorts = [ 41641 8000 25565 25510 6567 ];
   networking.firewall.checkReversePath = "loose";
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -187,7 +187,7 @@
       dockerCompat = true;
 
       # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.dnsname.enable = true;
+      defaultNetwork.settings.dns_enabled = true;
     };
     oci-containers = {
       backend = "podman";
