@@ -26,6 +26,9 @@
     obs-studio
     lutris
     cargo
+    syncplay
+    mpv
+    calibre
   ];
 
   programs.git = {

@@ -20,6 +20,7 @@
       ./hardware-configuration.nix
       ./pkgs.nix
       ./users.nix
+      ./network.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -31,27 +32,6 @@
   boot.kernel.sysctl = { "vm.max_map_count" = 16777216; };
 
   # services.udev.extraRules = builtins.readFile openrgb-rules;
-
-
-
-  networking.hostName = "mrow"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.nameservers = [ "1.1.1.1" ];
-
-  networking.nat = {
-    enable = true;
-    internalInterfaces = [ "ve-+" ];
-    externalInterface = "eno1";
-    # Lazy IPv6 connectivity for the container
-    enableIPv6 = true;
-  };
-  networking.hosts = {
-    # 127.0.0.1 modules-cdn.eac-prod.on.epicgames.com
-    "127.0.0.1" = [ "modules-cdn.eac-prod.on.epicgames.com" ];
-  };
-
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
@@ -144,12 +124,7 @@
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
 
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 41641 8000 25565 25510 6567 ];
-  networking.firewall.allowedUDPPorts = [ 41641 8000 25565 25510 6567 ];
-  networking.firewall.checkReversePath = "loose";
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+
 
   services.tailscale.enable = true;
 
