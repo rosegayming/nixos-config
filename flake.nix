@@ -1,32 +1,33 @@
 {
+  description = "A very basic flake";
+
   inputs = {
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # plover-flake.url = "github:dnaq/plover-plugin-flake";
   };
 
-  outputs = { self, fenix, nixpkgs }: {
-    defaultPackage.x86_64-linux = fenix.packages.x86_64-linux.minimal.toolchain;
-    nixosConfigurations.mrow = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs }:
+    let
       system = "x86_64-linux";
-      modules = [
-        ({ pkgs, ... }: {
-          nixpkgs.overlays = [ fenix.overlays.default ];
-          environment.systemPackages = with pkgs; [
-            (fenix.complete.withComponents [
-              "cargo"
-              "clippy"
-              "rust-src"
-              "rustc"
-              "rustfmt"
-            ])
-            rust-analyzer-nightly
-          ];
-        })
-        ./configuration.nix
-      ];
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      lib = nixpkgs.lib;
+    in
+    {
+      nixosConfigurations = {
+        mrow = lib.nixosSystem {
+          inherit system;
+          modules = [ ./configuration.nix ];
+          # plover-flake.${system}.plover-with-plugins = (ps: with ps; [
+          # plover_dictionary_commands
+          # plover_console_ui
+          # ]);
+        };
+      };
     };
-  };
+
 }
+
+
