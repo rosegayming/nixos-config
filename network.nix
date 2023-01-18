@@ -26,7 +26,56 @@
     firewall.checkReversePath = "loose";
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;
-
-
   };
+  # TODO: Use this isntead
+  # systemd.network = {
+  # netdevs = {
+  # he-ipv6 = {
+  # netdevConfig = {
+  # Kind = "sit";
+  # MTUBytes = 1480;
+  # };
+  # tunnelConfig = {
+  # Local = "192.168.1.100";
+  # Remote = "216.66.38.58";
+  # TTL = 255;
+  # };
+  # };
+  # };
+  # networks = {
+  # he-ipv6 = {
+  # matchConfig = {
+  # Name = "he-ipv6";
+  # };
+  # 
+  # address = "2001:470:1c:382::2/64";
+  # gateway = "216.66.38.58";
+  # dns = [ "2001:4860:4860::8888" "2001:4860:4860::8844" ];
+  # };
+  # };
+  # };
+
+  systemd.services.he-ipv6 = {
+    enable = false;
+    description = "he.net IPv6 Tunnel";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = "yes";
+      ExecStart = [
+        "/run/current-system/sw/bin/ip tunnel add he-ipv6 mode sit remote 216.66.38.58 local 192.168.1.100 ttl 255"
+        "/run/current-system/sw/bin/ip link set he-ipv6 up mtu 1480"
+        "/run/current-system/sw/bin/ip addr add 2001:470:1c:382::2 dev he-ipv6"
+        "/run/current-system/sw/bin/ip - 6 route add ::/0 dev he-ipv6"
+      ];
+      ExecStop = [
+        "/run/current-system/sw/bin/ip - 6 route del ::/0 dev he-ipv6"
+        "/run/current-system/sw/bin/ip link set he-ipv6 down"
+        "/run/current-system/sw/bin/ip tunnel del he-ipv6"
+      ];
+    };
+  };
+
 }
