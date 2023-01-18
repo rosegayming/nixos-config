@@ -25,10 +25,11 @@
     minecraft
     obs-studio
     lutris
-    cargo
     syncplay
     mpv
     calibre
+    rustup
+    sapling
   ];
 
   programs.git = {
@@ -44,6 +45,13 @@
         defaultBranch = "main";
       };
     };
+  };
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      matklad.rust-analyzer
+    ];
   };
 
   services.gpg-agent = {
