@@ -1,5 +1,5 @@
 # { plover-flake, ... }:
-{wine-8, ...}:
+# {wine-8, ...}:
 { pkgs, ... }:
 
 {
@@ -24,8 +24,8 @@
     pkgs.python311
     pkgs.arcanPackages.all-wrapped
     # plover-flake.packages.${pkgs.system}.plover
-    wine-8.packages.${pkgs.system}.wine-staging
-    wine-8.packages.${pkgs.system}.winePackages.stagingFull
+    # wine-8.packages.${pkgs.system}.wine-staging
+    # wine-8.packages.${pkgs.system}.winePackages.stagingFull
     pkgs.winetricks
     pkgs.temurin-bin
     pkgs.clang
