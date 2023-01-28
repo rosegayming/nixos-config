@@ -3,10 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    wine-8.url = "github:SFrijters/nixpkgs/wine-8";
     # plover-flake.url = "github:dnaq/plover-plugin-flake";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, wine-8 }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -19,11 +20,9 @@
       nixosConfigurations = {
         mrow = lib.nixosSystem {
           inherit system;
-          modules = [ ./configuration.nix ];
-          # plover-flake.${system}.plover-with-plugins = (ps: with ps; [
-          # plover_dictionary_commands
-          # plover_console_ui
-          # ]);
+          modules = [ 
+          ( import ./configuration.nix inputs) 
+          ];
         };
       };
     };

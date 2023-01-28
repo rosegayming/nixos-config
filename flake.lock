@@ -1,61 +1,40 @@
 {
   "nodes": {
-    "fenix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src"
-      },
-      "locked": {
-        "lastModified": 1674023045,
-        "narHash": "sha256-btQC+gTeVLmX9cYl/6Kig7BuDltVWJEh7TrITAc6QjA=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "75dbe699bc57323cdef636b82bcfef6028bd1530",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1673796341,
-        "narHash": "sha256-1kZi9OkukpNmOaPY7S5/+SlCDOuYnP3HkXHvNDyLQcc=",
-        "owner": "NixOS",
+        "lastModified": 1674641431,
+        "narHash": "sha256-qfo19qVZBP4qn5M5gXc/h1MDgAtPA5VxJm9s8RUAkVk=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6dccdc458512abce8d19f74195bb20fdb067df50",
+        "rev": "9b97ad7b4330aacda9b2343396eb3df8a853b4fc",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
+        "owner": "nixos",
         "ref": "nixos-unstable",
-        "type": "indirect"
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "fenix": "fenix",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "wine-8": "wine-8"
       }
     },
-    "rust-analyzer-src": {
-      "flake": false,
+    "wine-8": {
       "locked": {
-        "lastModified": 1673979364,
-        "narHash": "sha256-ecgQENol9XhhcYF+M9B8FMrsWYQ/ZvRsvgEWi8HI6D0=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "3a7271336536f2cd558498755254ae8c0e73baa7",
+        "lastModified": 1674774900,
+        "narHash": "sha256-mb8iEYJjoa6tcQB+NnRSAQoCQ99SSOzYRvkJbV9JSs0=",
+        "owner": "SFrijters",
+        "repo": "nixpkgs",
+        "rev": "39653001cf698097e166903c4988cc0eba9f17cc",
         "type": "github"
       },
       "original": {
-        "owner": "rust-lang",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
+        "owner": "SFrijters",
+        "ref": "wine-8",
+        "repo": "nixpkgs",
         "type": "github"
       }
     }

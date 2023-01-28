@@ -30,6 +30,21 @@
     calibre
     rustup
     sapling
+    libgen-cli
+    qt6.full
+    automake
+    hidapi
+    libusb1
+    mbedtls
+    qtcreator
+    gnumake
+    gcc
+    qmk
+    unrar
+    obsidian
+    # itch
+    dwarfs
+    unzip
   ];
 
   programs.git = {
@@ -51,6 +66,8 @@
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       matklad.rust-analyzer
+      dracula-theme.theme-dracula
+      bungcip.better-toml
     ];
   };
 
