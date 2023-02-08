@@ -1,5 +1,5 @@
-# { plover-flake, ... }:
-{ pkgs, inputs, ... }:
+{ agenix, ... }:
+{ pkgs, ... }:
 
 {
   programs = {
@@ -22,6 +22,7 @@
     # pkgs.ansible
     pkgs.python311
     pkgs.arcanPackages.all-wrapped
+    pkgs.winePackages.stagingFull
     # plover-flake.packages.${pkgs.system}.plover
     # wine-8.packages.${pkgs.system}.wine-staging
     # wine-8.packages.${pkgs.system}.winePackages.stagingFull
@@ -35,7 +36,7 @@
     pkgs.via
     pkgs.vial
     pkgs.plover.dev
-    inputs.agenix.packages.x86_64-linux.default
+    # inputs.agenix.packages.x86_64-linux.default
   ];
 
 }
