@@ -45,6 +45,8 @@
     # itch
     dwarfs
     unzip
+    kitty
+    gimp
   ];
 
   programs.git = {

@@ -1,6 +1,5 @@
 # { plover-flake, ... }:
-# {wine-8, ...}:
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   programs = {
@@ -36,6 +35,7 @@
     pkgs.via
     pkgs.vial
     pkgs.plover.dev
+    inputs.agenix.packages.x86_64-linux.default
   ];
 
 }
