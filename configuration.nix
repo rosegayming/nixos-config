@@ -13,7 +13,7 @@
       ./network.nix
     ];
 
-  age.secrets.murmur.file = /etc/nixos/secrets/murmur.age;
+  age.secrets.murmur.file = ./secrets/murmur.age;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

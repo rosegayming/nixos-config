@@ -24,6 +24,7 @@
           modules = [
             (import ./configuration.nix inputs)
             (import ./pkgs.nix inputs)
+            agenix.nixosModules.default
           ];
         };
       };
