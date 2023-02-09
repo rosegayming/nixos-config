@@ -1,27 +1,19 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ agenix, ...}:
+{ agenix, ... }@inputs:
 { config, pkgs, ... }:
-
-# let
-# openrgb-rules = builtins.fetchurl
-# {
-# url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/jobs/artifacts/master/raw/60-openrgb.rules?job=Linux+64+AppImage&inline=false";
-# name = "60-openrgb.rules";
-# };
-# 
-# in
 
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./pkgs.nix
       ./users.nix
       ./network.nix
     ];
+
+  age.secrets.murmur.file = /etc/nixos/secrets/murmur.age;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -135,6 +127,7 @@
     openFirewall = true;
     port = 12345;
     bandwidth = 256000;
+    environmentFile = config.age.secrets.murmur.path;
   };
 
   services.hardware.openrgb = {

@@ -1,4 +1,4 @@
-{ agenix, ... }:
+{ agenix, ... }@inputs:
 { pkgs, ... }:
 
 {
@@ -36,7 +36,7 @@
     pkgs.via
     pkgs.vial
     pkgs.plover.dev
-    # inputs.agenix.packages.x86_64-linux.default
+    inputs.agenix.packages.x86_64-linux.default
   ];
 
 }

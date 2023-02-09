@@ -8,7 +8,7 @@
     # plover-flake.url = "github:dnaq/plover-plugin-flake";
   };
 
-  outputs = { self, nixpkgs, agenix}@inputs:
+  outputs = { self, nixpkgs, agenix }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -22,7 +22,8 @@
         mrow = lib.nixosSystem {
           inherit system;
           modules = [
-          	(import ./configuration.nix inputs)
+            (import ./configuration.nix inputs)
+            (import ./pkgs.nix inputs)
           ];
         };
       };
