@@ -1,17 +1,17 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ agenix, ... }@inputs:
-{ config, pkgs, ... }:
-
-{
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./users.nix
-      ./network.nix
-    ];
+{agenix, ...} @ inputs: {
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./users.nix
+    ./network.nix
+  ];
 
   age.secrets.murmur.file = ./secrets/murmur.age;
 
@@ -20,12 +20,12 @@
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
-  boot.kernel.sysctl = { "vm.max_map_count" = 16777216; };
+  boot.kernelModules = ["i2c-dev" "i2c-piix4"];
+  boot.kernel.sysctl = {"vm.max_map_count" = 16777216;};
 
   # services.udev.extraRules = builtins.readFile openrgb-rules;
 
-  services.udev.packages = [ pkgs.via ];
+  services.udev.packages = [pkgs.via];
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
@@ -59,11 +59,10 @@
 
   services.pcscd.enable = true;
 
-
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.nvidia.modesetting.enable = true;
@@ -71,8 +70,6 @@
   nixpkgs.config = {
     allowUnfree = true;
   };
-
-
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -118,8 +115,6 @@
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
 
-
-
   services.tailscale.enable = true;
 
   services.murmur = {
@@ -127,6 +122,7 @@
     openFirewall = true;
     port = 12345;
     bandwidth = 256000;
+    password = "$MURMURD_PASSWORD";
     environmentFile = config.age.secrets.murmur.path;
   };
 
@@ -148,7 +144,6 @@
     ];
   };
 
-
   virtualisation = {
     podman = {
       enable = true;
@@ -167,7 +162,6 @@
         # autoStart = true;
         # ports = [ "127.0.0.1:1234:1234" ];
         # };
-
       };
     };
   };
@@ -181,10 +175,9 @@
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
     };
   };
-
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -198,6 +191,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }
-

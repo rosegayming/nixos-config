@@ -1,7 +1,4 @@
-{ agenix, ... }@inputs:
-{ pkgs, ... }:
-
-{
+{agenix, ...} @ inputs: {pkgs, ...}: {
   programs = {
     steam = {
       enable = true;
@@ -38,5 +35,4 @@
     pkgs.plover.dev
     inputs.agenix.packages.x86_64-linux.default
   ];
-
 }

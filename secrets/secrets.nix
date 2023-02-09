@@ -1,7 +1,6 @@
 let
-	quartz = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGO6jAizB9gUq8J/hbEsXrCc+qtS11zGVVLN/njIi+Q4 quartz@mrow";
-	users = [quartz];
-in
-{
-	"murmur.age".publicKeys = [quartz];
+  root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtg7Hbbr7WQB+DGyq+Wr3zB9cCOVfMEOD/bG6MO9SGN root@mrow";
+  users = [root];
+in {
+  "murmur.age".publicKeys = [root];
 }

@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   users.users = {
     quartz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" "rtkit" "audio" ];
+      extraGroups = ["wheel" "video" "rtkit" "audio"];
       packages = with pkgs; [
         firefox
         thunderbird
@@ -16,12 +18,12 @@
     };
     maya = {
       isNormalUser = true;
-      extraGroups = [ ];
+      extraGroups = [];
       uid = 1001;
     };
     minecraf = {
       isNormalUser = true;
-      extraGroups = [ ];
+      extraGroups = [];
       uid = 1002;
     };
   };

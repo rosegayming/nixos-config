@@ -1,12 +1,14 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "quartz";
   home.homeDirectory = "/home/quartz";
 
-  home.packages = with pkgs;  [
+  home.packages = with pkgs; [
     btop
     kate
     olm

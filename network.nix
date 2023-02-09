@@ -1,28 +1,26 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   networking = {
     hostName = "mrow"; # Define your hostname.
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-    nameservers = [ "1.1.1.1" ];
+    nameservers = ["1.1.1.1"];
 
     nat = {
       enable = true;
-      internalInterfaces = [ "ve-+" ];
+      internalInterfaces = ["ve-+"];
       externalInterface = "eno1";
       # Lazy IPv6 connectivity for the container
       enableIPv6 = true;
     };
     hosts = {
       # 127.0.0.1 modules-cdn.eac-prod.on.epicgames.com
-      "127.0.0.1" = [ "modules-cdn.eac-prod.on.epicgames.com" ];
+      "127.0.0.1" = ["modules-cdn.eac-prod.on.epicgames.com"];
     };
 
     # Open ports in the firewall.
-    firewall.allowedTCPPorts = [ 41641 8000 25565 25510 6567 ];
-    firewall.allowedUDPPorts = [ 41641 8000 25565 25510 6567 ];
+    firewall.allowedTCPPorts = [41641 8000 25565 25510 6567];
+    firewall.allowedUDPPorts = [41641 8000 25565 25510 6567];
     firewall.checkReversePath = "loose";
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;
@@ -47,7 +45,7 @@
   # matchConfig = {
   # Name = "he-ipv6";
   # };
-  # 
+  #
   # address = "2001:470:1c:382::2/64";
   # gateway = "216.66.38.58";
   # dns = [ "2001:4860:4860::8888" "2001:4860:4860::8844" ];
@@ -58,8 +56,8 @@
   systemd.services.he-ipv6 = {
     enable = false;
     description = "he.net IPv6 Tunnel";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
 
     serviceConfig = {
       Type = "oneshot";
@@ -77,5 +75,4 @@
       ];
     };
   };
-
 }
