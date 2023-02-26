@@ -3,52 +3,89 @@
   pkgs,
   ...
 }: {
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
+  # TODO: Also make home manager not suck idc rn I just want buildable system
   home.username = "quartz";
   home.homeDirectory = "/home/quartz";
 
   home.packages = with pkgs; [
+    # System
     btop
-    kate
-    olm
-    imagemagick
-    prusa-slicer
-    nix-du
-    graphviz
-    zgrviewer
-    gh
-    qbittorrent
+    dwarfs
+    fish
+    python311
     temurin-bin
+    kitty
+    qbittorrent
+    qmk
+    temurin-bin
+    unrar
+    liquidsoap
+    unzip
+
+    # Development
+
+    ## Utilities
+    automake
+    clang
+    gh
+    gnumake
+    kate
     kompare
-    mumble
-    cider
-    packwiz
-    minecraft
-    obs-studio
-    lutris
-    syncplay
-    mpv
-    calibre
+    mold
+    qtcreator
     rustup
     sapling
-    libgen-cli
-    qt6.full
-    automake
+
+    ## Libs
     hidapi
     libusb1
+    llvmPackages.libunwind
     mbedtls
-    qtcreator
-    gnumake
-    gcc
-    qmk
-    unrar
-    obsidian
-    # itch
-    dwarfs
-    unzip
-    kitty
+    olm
+    qt6.full
+
+    # nix
+    graphviz
+    nil
+    nix-du
+    zgrviewer
+
+    # Media
+    calibre
+    cider
+    digikam
+    furnace
     gimp
+    imagemagick
+    libgen-cli
+    mpv
+    qpwgraph
+    syncplay
+    vlc
+
+    # Games
+    lutris
+    mindustry
+    minecraft
+    packwiz
+    prismlauncher
+    winePackages.stagingFull
+    winetricks
+
+    # Social
+    discord
+    mumble
+    nheko
+    thunderbird
+
+    # Misc
+    ark
+    firefox
+    ffmpeg_5-full
+    obs-studio
+    obsidian
+    libsForQt5.ksystemlog
+    gamemode
   ];
 
   programs.git = {
@@ -68,11 +105,25 @@
 
   programs.vscode = {
     enable = true;
+    # enableUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
       matklad.rust-analyzer
       dracula-theme.theme-dracula
       bungcip.better-toml
+      jnoortheen.nix-ide
     ];
+    # userSettings = {
+    #   workbench.colorTheme = "Sweet Dracula";
+    #   nix = {
+    #     enableLanguageServer = true;
+    #     serverPath = "nil";
+    #     serverSettings = {
+    #       nil = {
+    #         formatting.command = ["alejandra"];
+    #       };
+    #     };
+    #   };
+    # };
   };
 
   services.gpg-agent = {

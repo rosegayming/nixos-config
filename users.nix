@@ -7,18 +7,11 @@
     quartz = {
       isNormalUser = true;
       extraGroups = ["wheel" "video" "rtkit" "audio"];
-      packages = with pkgs; [
-        firefox
-        thunderbird
-        discord
-        nheko
-        fish
-      ];
       uid = 1000;
     };
     maya = {
       isNormalUser = true;
-      extraGroups = [];
+      extraGroups = ["wheel" "video" "rtkit" "audio"];
       uid = 1001;
     };
     minecraf = {

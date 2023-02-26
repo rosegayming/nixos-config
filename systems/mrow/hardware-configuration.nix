@@ -12,10 +12,13 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "uas" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot = {
+    initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "uas" "sd_mod"];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-amd" "i2c-dev" "i2c-piix4" "wireguard"];
+    extraModulePackages = [];
+    kernel.sysctl = {"vm.max_map_count" = 16777216;};
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/697cf76c-8c44-4eda-881e-d5875c5ee947";
@@ -51,4 +54,13 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.opengl.driSupport32Bit = true;
+  hardware.nvidia.modesetting.enable = true;
+
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
 }
