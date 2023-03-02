@@ -4,19 +4,20 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # agenix.url = "github:ryantm/agenix";
+    agenix.url = "github:ryantm/agenix";
     plover-flake.url = "github:dnaq/plover-plugin-flake";
     home-manager = {
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
-    # agenix,
+    agenix,
     plover-flake,
   } @ inputs: let
     system = "x86_64-linux";
@@ -29,8 +30,7 @@
     nixosConfigurations = (
       import ./systems {
         inherit (nixpkgs) lib;
-        inherit inputs pkgs;
-        # agenix
+        inherit inputs pkgs agenix;
       }
       # mrow = lib.nixosSystem {
       #   inherit system;

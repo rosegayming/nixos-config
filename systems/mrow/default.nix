@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  # agenix,
+  agenix,
   ...
 }: {
   imports =

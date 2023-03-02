@@ -1,5 +1,5 @@
 {
-  # agenix,
+  agenix,
   lib,
   inputs,
   pkgs,
@@ -14,7 +14,7 @@ in {
     };
     modules = [
       ./mrow
-      # agenix.nixosModules.default
+      agenix.nixosModules.default
     ];
   };
 }
